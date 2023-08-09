@@ -18,5 +18,10 @@
     "name": "Ivy",
     "type": "cat",
     "age": 9
+  },
+  {
+    "name": "Bruno",
+    "type": "cat",
+    "age": 19
   }
 ]

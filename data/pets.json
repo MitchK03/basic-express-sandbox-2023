@@ -1,0 +1,22 @@
+[
+  {
+    "name": "Mabel",
+    "type": "dog",
+    "age": 1
+  },
+  {
+    "name": "Alpha",
+    "type": "dog",
+    "age": 3
+  },
+  {
+    "name": "Bruno",
+    "type": "dog",
+    "age": 2
+  },
+  {
+    "name": "Ivy",
+    "type": "cat",
+    "age": 9
+  }
+]

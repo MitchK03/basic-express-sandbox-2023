@@ -18,12 +18,8 @@ app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'index.html'))
 })
 
-app.get('/about', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'about.html'))
-})
-
-app.get('/contact', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'contact.html'))
+app.get('/create-pet', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'create-pet.html'))
 })
 
 // API Routes
@@ -31,10 +27,22 @@ app.get('/api/all-pets', (req, res) => {
   res.json(pets)
 })
 
+// ?name=Ivy Query Parameter
 app.get('/api/search-pets', (req, res) => {
   const searchedName = req.query.name
-  const results = pets.filter(pet => pet.name === searchedName)
+  const results = pets.filter(pet => {
+    const formattedSearchedName = searchedName.toLowerCase().trim()
+    const formattedPetName = pet.name.toLowerCase().trim()
+    return formattedPetName.includes(formattedSearchedName)
+  })
   res.json(results)
+})
+
+// URL parameter
+app.get('/api/pet/:id', (req, res) => {
+  const id = parseFloat(req.params.id)
+  const foundPet = pets.find(pet => pet.id === id)
+  res.json(foundPet)
 })
 
 app.post('/api/create-pet', async (req, res) => {

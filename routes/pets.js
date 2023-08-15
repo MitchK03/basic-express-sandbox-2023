@@ -1,17 +1,17 @@
-const router = require('express').Router
+const router = require('express').Router()
 const path = require('path')
 const { readFile, writeFile } = require('fs/promises')
-const pets = require('./data/pets.json')
-const dataPath = path.join(__dirname, 'data', 'pets.json')
-const { generateId } = require('./utils/generateId')
+const pets = require('../data/pets.json')
+const dataPath = path.join(__dirname, '..','data', 'pets.json')
+const { generateId } = require('../utils/generateId')
 
 // API Routes
-app.get('/all-pets', (req, res) => {
+router.get('/all-pets', (req, res) => {
   res.json(pets)
 })
 
 // ?name=Ivy Query Parameter
-app.get('/search-pets', (req, res) => {
+router.get('/search-pets', (req, res) => {
   const searchedName = req.query.name
   const results = pets.filter(pet => {
     const formattedSearchedName = searchedName.toLowerCase().trim()
@@ -22,13 +22,13 @@ app.get('/search-pets', (req, res) => {
 })
 
 // URL parameter
-app.get('/pet/:id', (req, res) => {
+router.get('/pet/:id', (req, res) => {
   const id = parseFloat(req.params.id)
   const foundPet = pets.find(pet => pet.id === id)
   res.json(foundPet)
 })
 
-app.post('/create-pet', async (req, res) => {
+router.post('/create-pet', async (req, res) => {
 
   if (!req.body || !req.body.name || !req.body.age || !req.body.type) {
     return res.status(400).json('We need a name, age, and type')
